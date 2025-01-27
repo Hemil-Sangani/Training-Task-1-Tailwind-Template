@@ -12,6 +12,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <style>
       .quote-icon-right {
         display: inline-block;
@@ -20,24 +21,38 @@
         transform: scale(-1, -1);
       }
       .swiper-pagination-bullet-active {
-        background-color: green !important;
+        background-color: #10bc69 !important;
+      }
+      .animate-bounce-delay {
+        animation: bounce 3s infinite;
+        animation-delay: 0.5s; /* Adjust delay here */
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px); /* Adjust height here */
+        }
       }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body>
-    <div class="py-1 fixed bg-white w-full lg:px-56">
-      <nav class="flex justify-between p-3 items-center">
-        <h2 class="text-slate-600 font-bold text-2xl">eNno</h2>
-        <button
-          type="button"
-          class="hidden max-sm:block peer relative items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
+    <div class="py-1 fixed bg-[#ffffff] w-full z-40 lg:px-56">
+      <nav class="flex justify-between p-3 items-center max-md:flex-wrap">
+        <h2 class="text-slate-600 font-bold text-2xl mx-3">eNno</h2>
+        <!-- Toggle Button -->
+        <label
+          for="menu-toggle"
+          class="max-md:order-3 block max-sm:block relative items-center justify-center rounded-md p-2 max-sm:p-0 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white md:hidden cursor-pointer"
         >
+          <!-- Hamburger Icon -->
           <svg
-            class="block size-6"
+            class="size-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
@@ -51,136 +66,142 @@
               d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
             />
           </svg>
+        </label>
+
+        <!-- Hidden Checkbox -->
+        <input type="checkbox" id="menu-toggle" class="hidden peer" />
+        <button
+          class="hover:bg-green-400 order-3 max-md:order-2 max-md:me-8 max-md:ms-auto bg-green-500 rounded-full px-6 py-2 mx-3 text-white items-center"
+        >
+          Get Started
         </button>
-        <ul class="flex items-center max-sm:hidden peer-focus:block">
-          <li
-            class="mx-3 cursor-pointer hover:text-green-500 max-sm:my-3"
-            href="#"
-          >
-            Home
+        <!-- Navbar Menu -->
+        <ul
+          id="navbar-menu"
+          class="max-md:mx-4 max-md:order-4 peer-checked:flex hidden flex-col md:flex md:flex-row md:items-center w-full md:w-auto space-y-2 md:space-y-0 md:space-x-6 bg-white md:bg-transparent mt-4 md:mt-0"
+        >
+          <li>
+            <a href="#" class="text-gray-600 hover:text-green-500 active"
+              >Home</a
+            >
           </li>
-          <li
-            class="mx-3 cursor-pointer hover:text-green-500 max-sm:my-3"
-            href="#"
-          >
-            About
+          <li>
+            <a href="#about" class="text-gray-600 hover:text-green-500"
+              >About</a
+            >
           </li>
-          <li
-            class="mx-3 cursor-pointer hover:text-green-500 max-sm:my-3"
-            href="#"
-          >
-            Services
+          <li>
+            <a href="#services" class="text-gray-600 hover:text-green-500"
+              >Services</a
+            >
           </li>
-          <li
-            class="mx-3 cursor-pointer hover:text-green-500 max-sm:my-3"
-            href="#"
-          >
-            Portfolio
+          <li>
+            <a href="#portfolio" class="text-gray-600 hover:text-green-500"
+              >Portfolio</a
+            >
           </li>
-          <li
-            class="mx-3 cursor-pointer hover:text-green-500 max-sm:my-3"
-            href="#"
-          >
-            Team
+          <li>
+            <a href="#team" class="text-gray-600 hover:text-green-500">Team</a>
           </li>
-          <li
-            class="mx-3 p-3 flex cursor-pointer hover:text-green-500 max-sm:my-3"
-          >
-            <button class="peer" aria-haspopup="true" aria-expanded="false">
+          <li class="relative">
+            <button
+              class="peer flex items-center text-gray-600 hover:text-green-500"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               Dropdown
-            </button>
-            <svg
-              class="size-5 text-gray-400 align-center m-0.5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-              data-slot="icon"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <div
-              class="absolute hidden peer-focus:block bg-white shadow-lg rounded-md mt-8"
-              role="menu"
-            >
-              <a
-                href="#"
-                class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >Dropdown 1</a
+              <svg
+                class="ml-1 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-              <div class="group text-gray-700 px-4 py-2 hover:bg-gray-100">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            <ul
+              class="md:peer-focus:block max-md:peer-hover:block absolute left-0 hidden bg-white shadow-md rounded-md mt-2 w-40 group-hover:block"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                  >Dropdown 1</a
+                >
+              </li>
+              <li class="group relative justify-self-center">
                 <button
-                  class="inline"
+                  class="flex items-center text-gray-600 hover:text-green-500"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
                   Deep Dropdown
+                  <svg
+                    class="ml-1 w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
                 </button>
-                <svg
-                  class="inline size-5 text-gray-700 align-center m-0.5"
-                  viewBox="0 0 20 20"
-                  aria-hidden="true"
-                  data-slot="icon"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+
+                <!-- Dropdown Menu -->
                 <div
-                  class="absolute left-full top-0 hidden group-hover:block bg-white shadow-lg rounded-md mt-0 w-48 z-20"
+                  class="group-hover:block absolute left-full top-0 hidden bg-white shadow-lg rounded-md w-48 z-20"
                   role="menu"
                 >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                    >Dropdown A</a
+                  <ul
+                    class="absolute left-0 hidden bg-white shadow-md rounded-md mt-2 w-40 group-hover:block"
                   >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                    >Dropdown B</a
-                  >
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                    >Dropdown C</a
-                  >
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                        >Dropdown A</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                        >Dropdown B</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                        >Dropdown C</a
+                      >
+                    </li>
+                  </ul>
                 </div>
-              </div>
-
-              <a
-                href="#"
-                class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >Dropdown 2</a
-              >
-              <a
-                href="#"
-                class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >Dropdown 3</a
-              >
-              <a
-                href="#"
-                class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >Dropdown 4</a
-              >
-            </div>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                  >Dropdown 3</a
+                >
+              </li>
+            </ul>
           </li>
-          <li
-            class="mx-3 cursor-pointer hover:text-green-500 max-sm:my-3"
-            href="#"
-          >
-            Contact
+          <li>
+            <a href="#" class="text-gray-600 hover:text-green-500">Contact</a>
           </li>
-          <button
-            class="bg-green-500 rounded-full px-6 py-2 mx-3 text-white items-center"
-          >
-            Get Started
-          </button>
         </ul>
       </nav>
     </div>
@@ -188,7 +209,7 @@
       class="pt-28 grid grid-flow-col grid-cols-2 gap-3 xl:px-56 max-lg:grid-flow-row max-lg:grid-cols-1"
       id="top"
     >
-      <div class="p-3 col-span-1 max-lg:place-items-center">
+      <div class="p-3 col-span-1 max-lg:place-items-center" data-aos="fade-up">
         <div class="pt-48 text-slate-500 font-bold text-5xl max-lg:text-center">
           Elegant and Creative Solutions
         </div>
@@ -197,11 +218,11 @@
         </div>
         <div class="flex my-3">
           <button
-            class="bg-green-500 rounded-full px-6 py-2 text-white items-center"
+            class="bg-green-500 rounded-full px-6 py-2 text-white items-center hover:bg-green-400"
           >
             Get Started
           </button>
-          <button class="px-5 flex items-center text-green-500">
+          <button class="px-5 flex items-center text-green-500 group">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"
@@ -217,116 +238,160 @@
                 d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445"
               />
             </svg>
-            <span class="font-bold text-black">Watch Video</span>
+            <span class="font-bold text-black group-hover:text-green-500"
+              >Watch Video</span
+            >
           </button>
         </div>
       </div>
-      <div class="p-3 col-span-1 max-lg:place-items-center">
-        <img src="Images/hero-img.png" alt="" />
+      <div
+        class="p-3 col-span-1 max-lg:place-items-center"
+        data-aos="zoom-out"
+        data-aos-delay="100"
+      >
+        <img src="Images/hero-img.png" alt="" class="animate-bounce-delay" />
       </div>
     </div>
     <div
-      class="grid grid-flow-col pt-10 gap-6 mx-5 flex xl:px-56 max-md:grid-flow-row"
+      class="grid grid-flow-col pt-20 gap-6 mx-5 flex xl:px-56 max-md:grid-flow-row"
     >
-      <div class="bg-gray-50 text-green-500 px-3 py-6 max-md:mx-28 max-sm:mx-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          fill="currentColor"
-          height="30"
-          class="bi bi-activity m-3"
-          viewBox="0 0 16 16"
+      <div class="group" data-aos="fade-up" data-aos-delay="100">
+        <div
+          class="bg-[#444444] bg-opacity-[3%] text-green-500 px-3 py-6 max-md:mx-28 max-sm:mx-3 transform transition-transform duration-500 group-hover:-translate-y-5"
         >
-          <path
-            fill-rule="evenodd"
-            d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"
-          />
-        </svg>
-        <h5 class="text-slate-500 font-bold text-xl p-3">
-          Lorem, ipsum dolor.
-        </h5>
-        <p class="text-black p-3">
-          This is a longer card with supporting text below as a natural lead-in
-          to additional content. This content is a little bit longer.
-        </p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            fill="currentColor"
+            height="30"
+            class="bi bi-activity m-3"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"
+            />
+          </svg>
+          <h5
+            class="text-slate-500 font-bold text-xl p-3 group-hover:text-green-500"
+          >
+            Lorem, ipsum dolor.
+          </h5>
+          <p class="text-black p-3">
+            This is a longer card with supporting text below as a natural
+            lead-in to additional content. This content is a little bit longer.
+          </p>
+        </div>
       </div>
-      <div class="bg-gray-50 text-green-500 px-3 py-6 max-md:mx-28 max-sm:mx-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
-          fill="currentColor"
-          class="bi bi-activity m-3"
-          viewBox="0 0 16 16"
+
+      <div class="group" data-aos="fade-up" data-aos-delay="200">
+        <div
+          class="bg-[#444444] bg-opacity-[3%] text-green-500 px-3 py-6 max-md:mx-28 max-sm:mx-3 transform transition-transform duration-500 group-hover:-translate-y-5"
         >
-          <path
-            d="M2 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M0 2a2 2 0 0 1 3.937-.5h8.126A2 2 0 1 1 14.5 3.937v8.126a2 2 0 1 1-2.437 2.437H3.937A2 2 0 1 1 1.5 12.063V3.937A2 2 0 0 1 0 2m2.5 1.937v8.126c.703.18 1.256.734 1.437 1.437h8.126a2 2 0 0 1 1.437-1.437V3.937A2 2 0 0 1 12.063 2.5H3.937A2 2 0 0 1 2.5 3.937M14 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M2 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m12 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2"
-          />
-        </svg>
-        <h5 class="p-3 text-slate-500 font-bold text-xl">Dolor sit amet.</h5>
-        <p class="p-3 text-black">
-          This is a longer card with supporting text below as a natural lead-in
-          to additional content. This content is a little bit longer.
-        </p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            fill="currentColor"
+            class="bi bi-activity m-3"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M2 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M0 2a2 2 0 0 1 3.937-.5h8.126A2 2 0 1 1 14.5 3.937v8.126a2 2 0 1 1-2.437 2.437H3.937A2 2 0 1 1 1.5 12.063V3.937A2 2 0 0 1 0 2m2.5 1.937v8.126c.703.18 1.256.734 1.437 1.437h8.126a2 2 0 0 1 1.437-1.437V3.937A2 2 0 0 1 12.063 2.5H3.937A2 2 0 0 1 2.5 3.937M14 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M2 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m12 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2"
+            />
+          </svg>
+          <h5
+            class="p-3 text-slate-500 font-bold text-xl group-hover:text-green-500"
+          >
+            Dolor sit amet.
+          </h5>
+          <p class="p-3 text-black">
+            This is a longer card with supporting text below as a natural
+            lead-in to additional content. This content is a little bit longer.
+          </p>
+        </div>
       </div>
-      <div class="bg-gray-50 text-green-500 px-3 py-6 max-md:mx-28 max-sm:mx-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
-          fill="currentColor"
-          class="bi bi-activity m-3"
-          viewBox="0 0 16 16"
+      <div class="group" data-aos="fade-up" data-aos-delay="300">
+        <div
+          class="bg-[#444444] bg-opacity-[3%] text-green-500 px-3 py-6 max-md:mx-28 max-sm:mx-3 transform transition-transform duration-500 group-hover:-translate-y-5"
         >
-          <path
-            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"
-          />
-          <path
-            d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-2 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"
-          />
-        </svg>
-        <h5 class="p-3 text-slate-500 font-bold text-xl">Aipisicing elit.</h5>
-        <p class="p-3 text-black">
-          This is a longer card with supporting text below as a natural lead-in
-          to additional content. This content is a little bit longer.
-        </p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            fill="currentColor"
+            class="bi bi-activity m-3"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"
+            />
+            <path
+              d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-2 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"
+            />
+          </svg>
+          <h5
+            class="p-3 text-slate-500 font-bold text-xl group-hover:text-green-500"
+          >
+            Aipisicing elit.
+          </h5>
+          <p class="p-3 text-black">
+            This is a longer card with supporting text below as a natural
+            lead-in to additional content. This content is a little bit longer.
+          </p>
+        </div>
       </div>
     </div>
-    <div class="pt-20 flex flex-col xl:px-56">
-      <div class="relative mx-auto text-gray-200 font-bold text-center">
+    <div class="pt-20 flex flex-col xl:px-56" id="about">
+      <div
+        class="relative mx-auto text-gray-200 font-bold text-center"
+        data-aos="fade-up"
+      >
         <div class="z-0 text-4xl">ABOUT US</div>
         <div class="text-slate-500 z-10 inset-0 -mt-5 text-2xl">ABOUT</div>
+        <div class="my-6 block text-center font-normal text-black">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
+          blanditiis.
+        </div>
       </div>
-      <div class="my-6 block text-center">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-        blanditiis.
-      </div>
+
       <div
         class="grid grid-flow-col grid-cols-2 mx-5 max-lg:grid-flow-row max-md:grid-flow-row max-md:grid-cols-1"
       >
-        <div class="relative">
-          <img class="z-0" src="Images/about.png" />
-          <button class="mx-auto my-auto w-full h-full -mt-96 inset-0">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="50"
-              height="50"
-              class="w-full inline mx-2 z-10 -mt-72"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill="currentColor"
-                class="fill-green-500"
-                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"
-              />
-              <path
-                fill="white"
-                d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"
-              />
-            </svg>
-          </button>
+        <div
+          class="relative flex items-center justify-center"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <img class="z-0 w-full h-auto" src="Images/about.png" />
+          <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          >
+            <div
+              class="absolute w-16 h-16 bg-green-500 rounded-full animate-ping"
+            ></div>
+            <button class="flex justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="50"
+                height="50"
+                class="w-full inline mx-2 z-10"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill="currentColor"
+                  class="fill-green-500"
+                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"
+                />
+                <path
+                  fill="white"
+                  d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-        <div class="mx-3">
+        <div class="mx-3" data-aos="fade-up" data-aos-delay="200">
           <div class="text-3xl text-slate-500 font-bold">
             Voluptate, iusto veritatis necessitatibus natus reiciendis.
           </div>
@@ -400,40 +465,75 @@
     </div>
     <div
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 pt-16 xl:px-56"
+      data-aos="fade-up"
+      data-aos-delay="100"
     >
       <div class="text-green-500 font-bold text-3xl text-center">
-        232
+        <span
+          class="purecounter"
+          data-purecounter-start="0"
+          data-purecounter-end="232"
+          data-purecounter-duration="3"
+          >232</span
+        >
         <div class="my-2 text-xs text-gray-400">Clients</div>
       </div>
       <div class="text-green-500 font-bold text-3xl text-center">
-        521
+        <span
+          class="purecounter"
+          data-purecounter-start="0"
+          data-purecounter-end="521"
+          data-purecounter-duration="3"
+          >521</span
+        >
         <div class="my-2 text-xs text-gray-400">Projects</div>
       </div>
       <div class="text-green-500 font-bold text-3xl text-center">
-        1453
+        <span
+          class="purecounter"
+          data-purecounter-start="0"
+          data-purecounter-end="1453"
+          data-purecounter-duration="3"
+          >1453</span
+        >
         <div class="my-2 text-xs text-gray-400">Hours of Support</div>
       </div>
       <div class="text-green-500 font-bold text-3xl text-center">
-        32
+        <span
+          class="purecounter"
+          data-purecounter-start="0"
+          data-purecounter-end="32"
+          data-purecounter-duration="3"
+          >32</span
+        >
         <div class="my-2 text-xs text-gray-400">Workers</div>
       </div>
     </div>
 
     <!-- Services Section Begin-->
-    <div class="bg-gray-100 pt-20 pb-16 mt-8 mb-8 flex px-2 flex-col xl:px-56">
-      <div class="relative mx-auto text-gray-200 font-bold text-center">
+    <div
+      class="bg-[#f9f9f9] pt-20 pb-16 mt-8 mb-8 flex px-2 flex-col xl:px-56"
+      id="services"
+    >
+      <div
+        class="relative mx-auto text-gray-200 font-bold text-center"
+        data-aos="fade-up"
+      >
         <div class="z-0 text-4xl">SERVICES</div>
         <div class="text-slate-500 z-10 inset-0 -mt-5 text-2xl">SERVICES</div>
+        <div class="my-6 block text-center font-normal text-black">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
+          blanditiis.
+        </div>
       </div>
-      <div class="my-6 block text-center">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-        blanditiis.
-      </div>
+
       <div
         class="grid grid-rows-2 grid-flow-col gap-6 mt-8 mx-5 max-md:grid-rows-3 max-sm:grid-rows-6"
       >
         <div
-          class="bg-gray-50 px-4 pt-16 pb-16 hover:border border-green-500 group"
+          class="bg-[#ffffff] border border-[#444444] border-opacity-[15%] px-4 pt-16 pb-16 hover:border-green-500 group"
+          data-aos="fade-up"
+          data-aos-delay="100"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -458,7 +558,9 @@
         </div>
 
         <div
-          class="bg-gray-50 px-4 pt-16 pb-16 hover:border border-green-500 group"
+          class="bg-[#ffffff] border border-[#444444] border-opacity-[15%] px-4 pt-16 pb-16 hover:border-green-500 group"
+          data-aos="fade-up"
+          data-aos-delay="200"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -483,7 +585,9 @@
           </p>
         </div>
         <div
-          class="bg-gray-50 px-4 pt-16 pb-16 hover:border border-green-500 group"
+          class="bg-[#ffffff] border border-[#444444] border-opacity-[15%] px-4 pt-16 pb-16 hover:border-green-500 group"
+          data-aos="fade-up"
+          data-aos-delay="300"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -508,7 +612,9 @@
           </p>
         </div>
         <div
-          class="bg-gray-50 px-4 pt-16 pb-16 hover:border border-green-500 group"
+          class="bg-[#ffffff] border border-[#444444] border-opacity-[15%] px-4 pt-16 pb-16 hover:border-green-500 group"
+          data-aos="fade-up"
+          data-aos-delay="400"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -537,7 +643,9 @@
         </div>
 
         <div
-          class="bg-gray-50 px-4 pt-16 pb-16 hover:border border-green-500 group"
+          class="bg-[#ffffff] border border-[#444444] border-opacity-[15%] px-4 pt-16 pb-16 hover:border-green-500 group"
+          data-aos="fade-up"
+          data-aos-delay="500"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -562,7 +670,9 @@
           </p>
         </div>
         <div
-          class="bg-gray-50 px-4 pt-16 pb-16 hover:border border-green-500 group"
+          class="bg-[#ffffff] border border-[#444444] border-opacity-[15%] px-4 pt-16 pb-16 hover:border-green-500 group"
+          data-aos="fade-up"
+          data-aos-delay="600"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -593,20 +703,29 @@
     </div>
     <!-- Services Section End-->
     <!-- Portfolio Section Begin-->
-    <div class="pt-12 pb-16 mt-8 mb-8 flex flex-col px-2 xl:px-56">
-      <div class="relative mx-auto text-gray-200 font-bold text-center">
+    <div
+      class="pt-12 pb-16 mt-8 mb-8 flex flex-col px-2 xl:px-56"
+      id="portfolio"
+    >
+      <div
+        class="relative mx-auto text-gray-200 font-bold text-center"
+        data-aos="fade-up"
+      >
         <div class="z-0 text-4xl">PORTFOLIO</div>
         <div class="text-slate-500 z-10 inset-0 -mt-5 text-2xl">PORTFOLIO</div>
+        <div class="my-6 block text-center font-normal text-black">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
+          blanditiis.
+        </div>
       </div>
-      <div class="my-6 block text-center">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-        blanditiis.
-      </div>
+
       <div class="grid mt-4 mb-2">
         <div
           class="m-2 justify-self-center"
           role="group"
           aria-label="Basic outlined example"
+          data-aos="fade-up"
+          data-aos-delay="100"
         >
           <button
             type="button"
@@ -642,11 +761,13 @@
         <div
           class="grid grid-rows-4 grid-flow-col mx-5 gap-6 max-md:grid-rows-6 max-md:gap-4 max-sm:grid-rows-12"
           id="all-things"
+          data-aos="fade-up"
+          data-aos-delay="200"
         >
           <div class="group relative flex items-end justify-center">
             <img src="Images/app-1.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mt-4">
                 <div
@@ -711,7 +832,7 @@
           <div class="group relative flex items-end justify-center">
             <img src="Images/books-1.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mx-auto mt-4">
                 <div
@@ -776,7 +897,7 @@
           <div class="group relative flex items-end justify-center">
             <img src="Images/branding-2.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mx-auto mt-4">
                 <div
@@ -843,7 +964,7 @@
           <div class="group relative flex items-end justify-center">
             <img src="Images/product-3.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mx-auto mt-4">
                 <div
@@ -910,7 +1031,7 @@
           <div class="group relative flex items-end justify-center">
             <img src="Images/product-1.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mx-auto mt-4">
                 <div
@@ -977,7 +1098,7 @@
           <div class="group relative flex items-end justify-center">
             <img src="Images/app-2.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mx-auto mt-4">
                 <div
@@ -1042,7 +1163,7 @@
           <div class="group relative flex items-end justify-center">
             <img src="Images/books-2.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mx-auto mt-4">
                 <div
@@ -1107,7 +1228,7 @@
           <div class="group relative flex items-end justify-center">
             <img src="Images/branding-3.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mx-auto mt-4">
                 <div
@@ -1174,7 +1295,7 @@
           <div class="group relative flex items-end justify-center">
             <img src="Images/branding-1.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mx-auto mt-4">
                 <div
@@ -1241,7 +1362,7 @@
           <div class="group relative flex items-end justify-center">
             <img src="Images/product-2.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mx-auto mt-4">
                 <div
@@ -1308,7 +1429,7 @@
           <div class="group relative flex items-end justify-center">
             <img src="Images/app-3.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mx-auto mt-4">
                 <div
@@ -1373,7 +1494,7 @@
           <div class="group relative flex items-end justify-center">
             <img src="Images/books-3.jpg" />
             <div
-              class="hidden bg-white w-11/12 portfolio-info my-2 group-hover:block group-hover:absolute"
+              class="absolute opacity-0 bg-white w-11/12 ease-in-out duration-700 portfolio-info my-2 group-hover:-translate-y-2 group-hover:opacity-100 z-10"
             >
               <div class="max-w-4xl mx-auto mt-4">
                 <div
@@ -1440,25 +1561,29 @@
     </div>
     <!-- Portfolio Section End-->
     <!-- Testimonials Begin -->
-    <div class="bg-gray-100 pt-20 pb-16 mt-8 mb-8 flex flex-col xl:px-56">
-      <div class="relative mx-auto text-gray-200 font-bold text-center">
+    <div class="bg-[#f9f9f9] pt-20 pb-16 mt-8 mb-8 flex flex-col xl:px-56">
+      <div
+        class="relative mx-auto text-gray-200 font-bold text-center"
+        data-aos="fade-up"
+      >
         <div class="relative z-0 text-4xl">TESTIMONIALS</div>
         <div class="text-slate-500 absolute z-10 inset-0 my-5 text-2xl">
           TESTIMONIALS
         </div>
+        <div class="my-6 block text-center font-normal text-black">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
+          blanditiis.
+        </div>
       </div>
-      <div class="my-6 block text-center">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-        blanditiis.
-      </div>
-      <div class="swiper w-full">
+
+      <div class="swiper w-full" data-aos="fade-up" data-aos-delay="100">
         <!-- Wrapper -->
         <div class="swiper-wrapper">
           <!-- Slide 1 -->
           <div
             class="swiper-slide flex flex-col items-center justify-center p-5"
           >
-            <div class="bg-gray-200 mx-28 w-full">
+            <div class="bg-[#444444] bg-opacity-[3%] mx-28 w-full">
               <p class="text-gray-700 p-3 pb-20">
                 <span class="text-green-400 inline-table"
                   ><i
@@ -1489,7 +1614,7 @@
           <div
             class="swiper-slide flex flex-col items-center justify-center p-5"
           >
-            <div class="bg-gray-200 mx-28 w-full">
+            <div class="bg-[#444444] bg-opacity-[3%] mx-28 w-full">
               <p class="text-gray-700 p-3 pb-20">
                 <span class="text-green-400 inline-table"
                   ><i
@@ -1520,7 +1645,7 @@
           <div
             class="swiper-slide flex flex-col items-center justify-center p-5"
           >
-            <div class="bg-gray-200 mx-28 w-full">
+            <div class="bg-[#444444] bg-opacity-[3%] mx-28 w-full">
               <p class="text-gray-700 p-3 pb-20">
                 <span class="text-green-400 inline-table"
                   ><i
@@ -1551,7 +1676,7 @@
           <div
             class="swiper-slide flex flex-col items-center justify-center p-5"
           >
-            <div class="bg-gray-200 mx-28 w-full">
+            <div class="bg-[#444444] bg-opacity-[3%] mx-28 w-full">
               <p class="text-gray-700 p-3 pb-20">
                 <span class="text-green-400 inline-table"
                   ><i
@@ -1582,7 +1707,7 @@
           <div
             class="swiper-slide flex flex-col items-center justify-center p-5"
           >
-            <div class="bg-gray-200 mx-28 w-full">
+            <div class="bg-[#444444] bg-opacity-[3%] mx-28 w-full">
               <p class="text-gray-700 p-3 pb-20">
                 <span class="text-green-400 inline-table"
                   ><i
@@ -1617,40 +1742,45 @@
     <!-- Testimonials End -->
     <!-- Call To Action Begin -->
     <div class="py-14 bg-green-500 mt-16 mb-8 flex flex-col xl:px-56">
-      <div class="text-white font-bold text-center text-2xl">
-        Call to Action
-      </div>
-      <div class="text-white text-center mx-20 my-2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum autem
-        quia odio cumque eaque, error, in delectus natus earum aut vitae
-        possimus eligendi laborum, repellat ad obcaecati similique? Rem autem,
-        fugit maiores rerum ea dolor, nihil quidem, praesentium pariatur esse
-        qui est. Beatae, nisi atque aspernatur reiciendis sint in est.
-      </div>
-      <div class="my-5 text-center">
-        <button
-          class="text-white border border-white rounded-full py-3 px-12 hover:bg-green-600"
-        >
+      <div data-aos="zoom-in" data-aos-delay="100">
+        <div class="text-white font-bold text-center text-2xl">
           Call to Action
-        </button>
+        </div>
+        <div class="text-white text-center mx-20 my-2">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum autem
+          quia odio cumque eaque, error, in delectus natus earum aut vitae
+          possimus eligendi laborum, repellat ad obcaecati similique? Rem autem,
+          fugit maiores rerum ea dolor, nihil quidem, praesentium pariatur esse
+          qui est. Beatae, nisi atque aspernatur reiciendis sint in est.
+        </div>
+        <div class="my-5 text-center">
+          <button
+            class="text-white border border-white rounded-full py-3 px-12 hover:bg-green-400"
+          >
+            Call to Action
+          </button>
+        </div>
       </div>
     </div>
     <!-- Call To Action End -->
     <!--Team Section Begin-->
-    <div class="pt-12 pb-16 mt-8 mb-8 flex flex-col xl:px-56">
-      <div class="relative mx-auto text-gray-200 font-bold text-center">
+    <div class="pt-12 pb-16 mt-8 mb-8 flex flex-col xl:px-56" id="team">
+      <div
+        class="relative mx-auto text-gray-200 font-bold text-center"
+        data-aos="fade-up"
+      >
         <div class="z-10 text-4xl">TEAM</div>
         <div class="text-slate-500 z-20 inset-0 -my-5 text-2xl">TEAM</div>
+        <div class="my-6 block text-center font-normal text-black">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
+          blanditiis.
+        </div>
       </div>
 
-      <div class="my-6 block text-center">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-        blanditiis.
-      </div>
       <div
         class="grid grid-flow-col gap-5 max-xl:mx-5 max-md:gap-3 max-sm:grid-flow-row max-sm:space-y-16"
       >
-        <div class="relative">
+        <div class="relative" data-aos="fade-up" data-aos-delay="100">
           <!-- Image -->
           <img src="Images/team-1.jpg" class="w-full h-auto z-0" />
 
@@ -1735,7 +1865,7 @@
             </div>
           </div>
         </div>
-        <div class="relative">
+        <div class="relative" data-aos="fade-up" data-aos-delay="200">
           <!-- Image -->
           <img src="Images/team-2.jpg" class="w-full h-auto z-0" />
 
@@ -1818,7 +1948,7 @@
             </div>
           </div>
         </div>
-        <div class="relative">
+        <div class="relative" data-aos="fade-up" data-aos-delay="300">
           <!-- Image -->
           <img src="Images/team-3.jpg" class="w-full h-auto z-0" />
 
@@ -1904,29 +2034,41 @@
       </div>
     </div>
     <!-- Contact Us Begin-->
-    <div class="pt-12 pb-16 mt-8 mb-8 flex flex-col xl:px-56">
-      <div class="relative mx-auto text-gray-200 font-bold text-center">
+    <div class="pt-12 pb-16 mt-8 mb-8 flex flex-col xl:px-56" id="contact">
+      <div
+        class="relative mx-auto text-gray-200 font-bold text-center"
+        data-aos="fade-up"
+      >
         <div class="z-10 text-4xl">CONTACT</div>
         <div class="text-slate-500 z-20 inset-0 -my-5 text-2xl">CONTACT</div>
+        <div class="my-6 block text-center text-black font-normal">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
+          blanditiis.
+        </div>
       </div>
-      <div class="my-6 block text-center">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-        blanditiis.
-      </div>
+
       <div
         class="grid grid-flow-col grid-cols-5 mx-5 gap-5 max-md:grid-cols-1 max-md:grid-flow-row"
       >
         <div
           class="border-solid shadow-lg p-3 py-4 col-span-2 max-md:col-span-1"
+          data-aos="fade-up"
+          data-aos-delay="100"
         >
           <div class="mx-3">
-            <div class="flex flex-row m-3">
-              <div class="self-center rounded-full p-4 bg-green-100">
+            <div
+              class="flex flex-row m-3"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div
+                class="self-center rounded-full p-4 bg-green-100 group hover:bg-green-500"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
                   height="18"
-                  class="bi bi-geo-alt fill-green-500 align-center"
+                  class="bi bi-geo-alt fill-green-500 align-center group-hover:fill-white"
                   viewBox="0 0 16 16"
                 >
                   <path
@@ -1943,13 +2085,19 @@
                 <div>kedarnath Society Kedarnath Uttarakand India</div>
               </div>
             </div>
-            <div class="flex flex-row mx-3 my-7">
-              <div class="self-center rounded-full p-4 bg-green-100">
+            <div
+              class="flex flex-row mx-3 my-7"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div
+                class="self-center rounded-full p-4 bg-green-100 group hover:bg-green-500"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
                   height="18"
-                  class="bi bi-telephone fill-green-500 align-center"
+                  class="bi bi-telephone fill-green-500 align-center group-hover:fill-white"
                   viewBox="0 0 16 16"
                 >
                   <path
@@ -1963,13 +2111,19 @@
                 <div class="underline">+911234567891</div>
               </div>
             </div>
-            <div class="flex flex-row m-3">
-              <div class="self-center rounded-full p-4 bg-green-100">
+            <div
+              class="flex flex-row m-3"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <div
+                class="self-center rounded-full p-4 bg-green-100 group hover:bg-green-500"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
                   height="18"
-                  class="bi bi-envelope fill-green-500 align-center"
+                  class="bi bi-envelope fill-green-500 align-center group-hover:fill-white"
                   viewBox="0 0 16 16"
                 >
                   <path
@@ -1993,6 +2147,8 @@
         </div>
         <div
           class="border-solid shadow-lg col-span-3 p-3 py-4 gap-5 max-md:col-span-1"
+          data-aos="fade-up"
+          data-aos-delay="200"
         >
           <form class="p-3">
             <div
@@ -2034,7 +2190,7 @@
             </div>
             <div class="justify-self-center">
               <input
-                class="bg-green-500 cursor-pointer text-white rounded-full px-5 py-3 text-sm hover:bg-green-600"
+                class="bg-green-500 cursor-pointer text-white rounded-full px-5 py-3 text-sm hover:bg-green-400"
                 type="submit"
                 value="Send Message"
               />
@@ -2045,7 +2201,9 @@
     </div>
     <!-- Contact Us End-->
     <!-- Footer Begin -->
-    <div class="pt-12 pb-16 bg-gray-100 mt-8 mb-8 flex flex-col xl:px-56">
+    <div
+      class="pt-12 pb-16 bg-[#5f687b] bg-opacity-[3%] mt-8 mb-8 flex flex-col xl:px-56"
+    >
       <div class="text-slate-500 font-bold text-center text-2xl">
         Join Our Newsletter
       </div>
@@ -2060,7 +2218,7 @@
             type="email"
           />
           <input
-            class="bg-green-500 cursor-pointer text-white rounded-full px-5 py-3 text-sm hover:bg-green-600"
+            class="bg-green-500 cursor-pointer text-white rounded-full px-5 py-3 text-sm hover:bg-green-400"
             type="submit"
             value="Subscribe"
           />
@@ -2327,13 +2485,14 @@
       </div>
       <div>
         Designed by
-        <span class="text-green-500">BootstrapMade</span> Distributed by
-        <span class="text-green-500">ThemeWagon</span>
+        <span class="text-green-500 hover:text-green-400">BootstrapMade</span>
+        Distributed by
+        <span class="text-green-500 hover:text-green-400">ThemeWagon</span>
       </div>
       <div class="fixed bottom-4 right-4">
         <a
           role="button"
-          class="border border-solid border-green-500 bg-green-500 rounded-full h-12 w-12 flex items-center justify-center p-2 transition duration-200 hover:bg-green-600"
+          class="border border-solid border-green-500 bg-green-500 rounded-full h-12 w-12 flex items-center justify-center p-2 transition duration-200 hover:bg-green-400"
           href="#top"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -2351,13 +2510,24 @@
     </div>
     <!-- Footer End -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 800, // Animation duration in milliseconds
+        once: true, // Animation will happen only once while scrolling down
+      });
+    </script>
     <script>
       const swiper = new Swiper(".swiper", {
         slidesPerView: 1,
         spaceBetween: 30,
         direction: "horizontal",
         loop: true,
-
+        autoplay: {
+          delay: 3000, // Change slide every 3 seconds
+          disableOnInteraction: false, // Continue autoplay after user interactions
+        },
         // If we need pagination
         pagination: {
           el: ".swiper-pagination",
@@ -2368,6 +2538,11 @@
           1024: { slidesPerView: 3 },
         },
       });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+    <script>
+      // Initialize PureCounter (if not already auto-initialized)
+      new PureCounter();
     </script>
   </body>
 </html>
