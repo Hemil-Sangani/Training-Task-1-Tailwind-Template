@@ -42,7 +42,7 @@
   </head>
 
   <body>
-    <div class="py-1 fixed bg-[#ffffff] w-full z-40 lg:px-56">
+    <div class="py-1 fixed bg-[#ffffff] w-full z-40 lg:px-56 shadow-md lg:py-3">
       <nav class="flex justify-between p-3 items-center max-md:flex-wrap">
         <h2 class="text-slate-600 font-bold text-2xl mx-3">eNno</h2>
         <!-- Toggle Button -->
@@ -81,7 +81,9 @@
           class="max-md:mx-4 max-md:order-4 peer-checked:flex hidden flex-col md:flex md:flex-row md:items-center w-full md:w-auto space-y-2 md:space-y-0 md:space-x-6 bg-white md:bg-transparent mt-4 md:mt-0"
         >
           <li>
-            <a href="#" class="text-gray-600 hover:text-green-500 active"
+            <a
+              href="#"
+              class="text-gray-600 hover:text-green-500 text-green-500"
               >Home</a
             >
           </li>
@@ -103,7 +105,7 @@
           <li>
             <a href="#team" class="text-gray-600 hover:text-green-500">Team</a>
           </li>
-          <li class="relative">
+          <li class="group relative">
             <button
               class="peer flex items-center text-gray-600 hover:text-green-500"
               aria-haspopup="true"
@@ -126,18 +128,18 @@
               </svg>
             </button>
             <ul
-              class="md:peer-focus:block max-md:peer-hover:block absolute left-0 hidden bg-white shadow-md rounded-md mt-2 w-40 group-hover:block"
+              class="absolute left-0 hidden bg-white shadow-md rounded-md mt-2 w-40 group-focus-within:block"
             >
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                  class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-green-500"
                   >Dropdown 1</a
                 >
               </li>
-              <li class="group relative justify-self-center">
+              <li class="block ps-4 py-2 hover:bg-gray-100">
                 <button
-                  class="flex items-center text-gray-600 hover:text-green-500"
+                  class="peer flex items-center text-gray-600 hover:text-green-500"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
@@ -159,41 +161,36 @@
                 </button>
 
                 <!-- Dropdown Menu -->
-                <div
-                  class="group-hover:block absolute left-full top-0 hidden bg-white shadow-lg rounded-md w-48 z-20"
-                  role="menu"
+                <ul
+                  class="absolute left-full top-0 hidden bg-white shadow-lg rounded-md w-48 z-20 mt-2 w-40 peer-focus:block"
                 >
-                  <ul
-                    class="absolute left-0 hidden bg-white shadow-md rounded-md mt-2 w-40 group-hover:block"
-                  >
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                        >Dropdown A</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                        >Dropdown B</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                        >Dropdown C</a
-                      >
-                    </li>
-                  </ul>
-                </div>
+                  <li>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-green-500"
+                      >Dropdown A</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-green-500"
+                      >Dropdown B</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-green-500"
+                      >Dropdown C</a
+                    >
+                  </li>
+                </ul>
               </li>
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                  class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-green-500"
                   >Dropdown 3</a
                 >
               </li>
@@ -209,14 +206,14 @@
       class="pt-28 grid grid-flow-col grid-cols-2 gap-3 xl:px-56 max-lg:grid-flow-row max-lg:grid-cols-1"
       id="top"
     >
-      <div class="p-3 col-span-1 max-lg:place-items-center" data-aos="fade-up">
+      <div class="p-3 col-span-1 max-md:place-items-center" data-aos="fade-up">
         <div class="pt-48 text-slate-500 font-bold text-5xl max-lg:text-center">
           Elegant and Creative Solutions
         </div>
-        <div class="py-3 text-slate-400">
+        <div class="py-3 text-slate-400 max-lg:text-center">
           We are team of talented designers making website using Bootstrap
         </div>
-        <div class="flex my-3">
+        <div class="flex my-3 max-lg:justify-center">
           <button
             class="bg-green-500 rounded-full px-6 py-2 text-white items-center hover:bg-green-400"
           >
@@ -2212,13 +2209,13 @@
         products and services
       </div>
       <div class="flex justify-center mt-4">
-        <div class="rounded-full bg-white shadow-lg">
+        <div class="grid grid-cols-8 gap-0 w-full max-w-2xl max-md:ms-2 me-2">
           <input
-            class="flex-1 bg-transparent text-gray-700 placeholder-gray-400 rounded-full px-3 py-3 text-sm focus:outline-none xl:mx-48"
+            class="col-span-6 bg-white text-gray-700 placeholder-gray-400 rounded-full px-3 py-3 text-sm shadow-md focus:outline focus:outline-green-500"
             type="email"
           />
           <input
-            class="bg-green-500 cursor-pointer text-white rounded-full px-5 py-3 text-sm hover:bg-green-400"
+            class="-ms-12 bg-green-500 cursor-pointer text-center max-md:col-span-2 text-white rounded-full ps-5 pe-5 py-3 text-sm hover:bg-green-400"
             type="submit"
             value="Subscribe"
           />
